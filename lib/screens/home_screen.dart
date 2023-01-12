@@ -49,11 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     } else if (comm == '\\image') {
       selectImage();
+    } else if (comm.contains('\\text\\')) {
       setState(() {
-        output = imageUrl;
+        output = "helloo";
       });
-    } else if (comm == '\\text/') {
     } else if (comm == '\\logout') {
+      var comm = "logging out....";
+      setState(() {
+        output = comm;
+      });
       authMethods.logout(context);
     }
   }
@@ -89,19 +93,26 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       Uint8List image = await pickImage(ImageSource.gallery);
       imageUrl = await FireStoreMethods().uploadImage(image, userData['uid']);
+      print("check1");
+      fetchAsciiFromImage();
     } catch (e) {
       showSnackBar(e.toString(), context);
     }
-    setState(() {});
+    setState(() {
+      output = imageUrl;
+    });
   }
 
   fetchAsciiFromText(String text) async {
+
     await asciiServices.uploadTextCommand(text: text, context: context);
     setState(() {});
   }
 
   fetchAsciiFromImage() async {
+       print("check2");
     await asciiServices.uploadImageCommand(url: imageUrl, context: context);
+    print("check4");
     setState(() {});
   }
 

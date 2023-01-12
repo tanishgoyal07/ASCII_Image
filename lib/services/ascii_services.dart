@@ -28,7 +28,7 @@ class AsciiServices {
     }
   }
 
-  Future<void> uploadImageCommand({
+  Future<dynamic> uploadImageCommand({
     required String url,
     required BuildContext context,
   }) async {
@@ -42,6 +42,8 @@ class AsciiServices {
           "url" : url,
         }),
       );
+      print("check3");
+      print(res.body);
 
       httpErrorHandle(
         response: res,

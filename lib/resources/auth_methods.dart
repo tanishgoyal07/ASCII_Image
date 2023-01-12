@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ascii_image/screens/home_screen.dart';
 import 'package:ascii_image/screens/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -143,9 +145,13 @@ class AuthMethods {
   }
 
   Future<void> logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginScreen()));
+    Timer(const Duration(seconds: 2), () async {
+      await FirebaseAuth.instance.signOut();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ),
+      );
+    });
   }
-  
 }

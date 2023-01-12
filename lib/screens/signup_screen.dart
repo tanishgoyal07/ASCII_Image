@@ -232,7 +232,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(Icons.vpn_key),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Confirm Password",
         hintStyle: GlobalVariables.customStyle,
@@ -242,19 +257,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
     //signup button
     final signUpButton = Material(
       elevation: 5,
-      color: (emailEditingController.text != null &&
-              passwordEditingController.text != null &&
-              firstNameEditingController.text != null &&
-              secondNameEditingController.text != null &&
-              confirmPasswordEditingController.text != null)
-          ? GlobalVariables.mainColor
-          : Colors.grey,
+      color: Colors.grey,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           setState(() {
-            isloading = true;
+            if (emailEditingController.text.isNotEmpty &&
+                passwordEditingController.text.isNotEmpty &&
+                firstNameEditingController.text.isNotEmpty &&
+                secondNameEditingController.text.isNotEmpty &&
+                confirmPasswordEditingController.text.isNotEmpty) {
+              isloading = true;
+            }
           });
           AuthMethods().signUp(
             emailEditingController.text,

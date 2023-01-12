@@ -122,15 +122,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final loginButton = Material(
       elevation: 5,
-      color: (emailController.text != null && passwordController.text != null)
-          ? GlobalVariables.mainColor
-          : Colors.grey,
+      color: Colors.grey,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           setState(() {
-            isloading = true;
+            if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty){
+              isloading = true;
+            }
           });
           AuthMethods().signIn(
             emailController.text,
