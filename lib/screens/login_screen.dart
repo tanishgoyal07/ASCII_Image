@@ -1,4 +1,4 @@
-import 'package:ascii_image/auth/auth_methods.dart';
+import 'package:ascii_image/resources/auth_methods.dart';
 import 'package:ascii_image/constants/loader.dart';
 import 'package:ascii_image/constants/utils.dart';
 import 'package:ascii_image/screens/signup_screen.dart';
@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final _auth = FirebaseAuth.instance;
+
   String errorMessage = "Error";
   bool isloading = false;
 
@@ -54,7 +54,22 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(Icons.mail),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Your Email",
         hintStyle: GlobalVariables.customStyle,
@@ -83,9 +98,22 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(
-        //   Icons.vpn_key,
-        // ),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Your Password",
         hintStyle: GlobalVariables.customStyle,
@@ -94,7 +122,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final loginButton = Material(
       elevation: 5,
-      color: Colors.grey,
+      color: (emailController.text != null && passwordController.text != null)
+          ? GlobalVariables.mainColor
+          : Colors.grey,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
@@ -130,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          "C:/users/signin",
+          "C:\\users\\signin",
           style: GoogleFonts.courierPrime(
             color: GlobalVariables.secondaryColor,
             fontSize: 20,

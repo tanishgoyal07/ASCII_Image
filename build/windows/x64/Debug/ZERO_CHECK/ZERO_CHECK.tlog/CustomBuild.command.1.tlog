@@ -1,0 +1,10 @@
+^C:\PROJECTS\ASCII_IMAGE\BUILD\WINDOWS\CMAKEFILES\7AA4166F5AD358D5A46A600BF54DC6C7\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/projects/ascii_image/windows -BC:/projects/ascii_image/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/projects/ascii_image/build/windows/ascii_image.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

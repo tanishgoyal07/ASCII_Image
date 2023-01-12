@@ -1,14 +1,21 @@
-import 'package:ascii_image/auth/auth_methods.dart';
-import 'package:ascii_image/constants/loader.dart';
-import 'package:ascii_image/constants/utils.dart';
-import 'package:ascii_image/model/user_model.dart';
+import 'dart:typed_data';
+
+import 'package:ascii_image/providers/user_provider.dart';
+import 'package:ascii_image/resources/firestore_methods.dart';
+import 'package:ascii_image/services/ascii_services.dart';
+import 'package:ascii_image/widgets/input.dart';
+import 'package:blinking_text/blinking_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:blinking_text/blinking_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'login_screen.dart';
+import 'package:ascii_image/resources/auth_methods.dart';
+import 'package:ascii_image/constants/loader.dart';
+import 'package:ascii_image/constants/utils.dart';
+import 'package:ascii_image/model/user_model.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,10 +25,38 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final AsciiServices asciiServices = AsciiServices();
+  final AuthMethods authMethods = AuthMethods();
   User? user = FirebaseAuth.instance.currentUser;
-  // UserModel loggedInUser = UserModel();
   var userData = {};
   bool isLoading = false;
+  String imageUrl = "";
+
+  final TextEditingController _userInput = TextEditingController();
+  var output = "";
+  bool isEnable = true;
+  bool flag = true;
+  followCommands(String comm) {
+    if (comm == '\\help') {
+      var commands = "\\signup --> to sign up as a new user\n"
+          "\\login --> to log in as an existing user\n"
+          "\\text\\<your text here> --> to convert your text to ASCII Image\n"
+          "\\image --> to convert your image to ASCII Image\n"
+          "\\download\\recent --> to download the last ASCII Image\n";
+      "/logout --> to logout from your account\n";
+      setState(() {
+        output = commands;
+      });
+    } else if (comm == '\\image') {
+      selectImage();
+      setState(() {
+        output = imageUrl;
+      });
+    } else if (comm == '\\text/') {
+    } else if (comm == '\\logout') {
+      authMethods.logout(context);
+    }
+  }
 
   @override
   void initState() {
@@ -40,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           .get();
 
       userData = userSnap.data()!;
+      print(userData);
       setState(() {});
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -49,203 +85,120 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void selectImage() async {
+    try {
+      Uint8List image = await pickImage(ImageSource.gallery);
+      imageUrl = await FireStoreMethods().uploadImage(image, userData['uid']);
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+    setState(() {});
+  }
+
+  fetchAsciiFromText(String text) async {
+    await asciiServices.uploadTextCommand(text: text, context: context);
+    setState(() {});
+  }
+
+  fetchAsciiFromImage() async {
+    await asciiServices.uploadImageCommand(url: imageUrl, context: context);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    // return isLoading
-    //     ? const Loader()
-    //     : Scaffold(
-    //         backgroundColor: GlobalVariables.secondaryColor,
-    //         appBar: AppBar(
-    //           title: const Text("Welcome"),
-    //           centerTitle: true,
-    //           // backgroundColor: Colors.transparent,
-    //           // elevation: 0.0,
-    //         ),
-    //         body: Center(
-    //           child: Padding(
-    //             padding: const EdgeInsets.all(20),
-    //             child: Column(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               crossAxisAlignment: CrossAxisAlignment.center,
-    //               children: <Widget>[
-    //                 SizedBox(
-    //                   height: 150,
-    //                   child: Image.asset(
-    //                     "assets/logo2.png",
-    //                     fit: BoxFit.cover,
-    //                   ),
-    //                 ),
-    //                 const Text(
-    //                   "Welcome Back",
-    //                   style: TextStyle(
-    //                     fontSize: 20,
-    //                     fontWeight: FontWeight.bold,
-    //                     color: GlobalVariables.mainColor,
-    //                   ),
-    //                 ),
-    //                 const SizedBox(
-    //                   height: 10,
-    //                 ),
-    //                 Text(
-    //                   "${userData['firstName']} ${userData['secondName']}",
-    //                   style: const TextStyle(
-    //                     color: GlobalVariables.mainColor,
-    //                     fontWeight: FontWeight.w500,
-    //                   ),
-    //                 ),
-    //                 Text("${userData['email']}",
-    //                     style: const TextStyle(
-    //                       color: GlobalVariables.mainColor,
-    //                       fontWeight: FontWeight.w500,
-    //                     )),
-    //                 const SizedBox(
-    //                   height: 15,
-    //                 ),
-    //                 ActionChip(
-    //                   label: const Text(
-    //                     "Logout",
-    //                     style: TextStyle(
-    //                       color: GlobalVariables.secondaryColor,
-    //                     ),
-    //                   ),
-    //                   onPressed: () => AuthMethods().logout(context),
-    //                 ),
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       );
     return isLoading
         ? const Loader()
         : Scaffold(
             backgroundColor: Colors.black,
             appBar: AppBar(
-                backgroundColor: Colors.grey[900],
-                title: Text(
-                  "Command Prompt",
-                  style: GoogleFonts.courierPrime(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )),
+              backgroundColor: Colors.grey[900],
+              title: Text(
+                "Command Prompt",
+                style: GoogleFonts.courierPrime(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             body: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(10.0),
-                    child: const Center(
-                      child: BlinkText(
-                        'WELCOME!',
-                        style: TextStyle(
-                          fontSize: 35.0,
-                          color: GlobalVariables.mainColor,
-                        ),
-                        endColor: Colors.black,
-                        //duration: Duration(seconds: 1),
-                      ),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      const Text(
-                        "Microsoft Windows [Version 10.0.22621.963]",
-                        style: TextStyle(
-                          color: GlobalVariables.mainColor,
-                          fontSize: 13,
-                        ),
-                      ),
-                      const Text(
-                        "(c) Microsoft Corporation. All rights reserved.",
-                        style: TextStyle(
-                          color: GlobalVariables.mainColor,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
                     padding: const EdgeInsets.all(5.0),
-                    child: const Text(
-                      '!!Convert an Image to Image made up of ASCII values!!',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: GlobalVariables.mainColor,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5.0),
-                    child: const Text(
-                      'Convert text to ASCII image',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: GlobalVariables.mainColor,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  MaterialButton(
-                    color: Colors.grey,
-                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                    minWidth: 100,
-                    onPressed: () {},
                     child: Text(
-                      "Click Here",
-                      textAlign: TextAlign.center,
+                      "Type \\help to view the list of commands.",
                       style: GoogleFonts.courierPrime(
-                        fontSize: 20,
-                        color: GlobalVariables.secondaryColor,
-                        fontWeight: FontWeight.bold,
+                        color: GlobalVariables.mainColor,
+                        fontSize: 16.0,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(2.0),
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      'Convert image to ASCII image',
-                      style: GlobalVariables.customStyle,
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  MaterialButton(
-                    color: Colors.grey,
-                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                    minWidth: 100,
-                    onPressed: () {},
-                    child: Text(
-                      "Click Here",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.courierPrime(
-                        fontSize: 20,
-                        color: GlobalVariables.secondaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  takeInput(),
                 ],
               ),
             ),
           );
   }
 
-  // the logout function
+  takeInput() {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(2.0),
+                child: Text(
+                  "C:\\users\\${userData['firstName']}${userData['secondName']}",
+                  style: const TextStyle(
+                    color: GlobalVariables.mainColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              Flexible(
+                child: SizedBox(
+                  width: 1100.0,
+                  child: TextField(
+                    enabled: isEnable,
+                    onSubmitted: (value) {
+                      followCommands(value);
+                      setState(() {
+                        isEnable = false;
+                      });
+                    },
+                    controller: _userInput,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                    style: GoogleFonts.courierPrime(
+                      color: GlobalVariables.mainColor,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Text(
+            output,
+            style: GoogleFonts.courierPrime(
+              color: GlobalVariables.mainColor,
+              fontSize: 13.0,
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
 }

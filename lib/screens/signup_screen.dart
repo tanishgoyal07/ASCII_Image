@@ -1,15 +1,8 @@
-import 'package:ascii_image/auth/auth_methods.dart';
+import 'package:ascii_image/resources/auth_methods.dart';
 import 'package:ascii_image/constants/loader.dart';
 import 'package:ascii_image/constants/utils.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ascii_image/model/user_model.dart';
-import 'package:ascii_image/screens/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../model/user_model.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -67,7 +60,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(Icons.account_circle),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Your First Name",
         hintStyle: GlobalVariables.customStyle,
@@ -93,7 +101,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(Icons.account_circle),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Your Last Name",
         hintStyle: GlobalVariables.customStyle,
@@ -123,7 +146,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(Icons.mail),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Your Email",
         hintStyle: GlobalVariables.customStyle,
@@ -152,7 +190,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(Icons.vpn_key),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.zero),
+          borderSide: BorderSide(color: GlobalVariables.mainColor),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Your Password",
         hintStyle: GlobalVariables.customStyle,
@@ -189,7 +242,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     //signup button
     final signUpButton = Material(
       elevation: 5,
-      color: Colors.grey,
+      color: (emailEditingController.text != null &&
+              passwordEditingController.text != null &&
+              firstNameEditingController.text != null &&
+              secondNameEditingController.text != null &&
+              confirmPasswordEditingController.text != null)
+          ? GlobalVariables.mainColor
+          : Colors.grey,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
@@ -259,8 +318,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(
                       height: 180,
                       child: Image.asset(
-                         "assets/logo2.png",
-                          fit: BoxFit.cover,
+                        "assets/logo2.png",
+                        fit: BoxFit.cover,
                       ),
                     ),
                     const SizedBox(height: 45),

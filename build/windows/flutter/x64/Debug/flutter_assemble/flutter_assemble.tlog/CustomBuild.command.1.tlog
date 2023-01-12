@@ -1,0 +1,28 @@
+^C:\PROJECTS\ASCII_IMAGE\BUILD\WINDOWS\CMAKEFILES\F519CD99FE0788345911E5CCEB54022A\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\src\flutter PROJECT_DIR=C:\projects\ascii_image FLUTTER_ROOT=C:\src\flutter FLUTTER_EPHEMERAL_DIR=C:\projects\ascii_image\windows\flutter\ephemeral PROJECT_DIR=C:\projects\ascii_image FLUTTER_TARGET=C:\projects\ascii_image\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false EXTRA_FRONT_END_OPTIONS=--no-sound-null-safety TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\projects\ascii_image\.dart_tool\package_config.json C:/src/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\PROJECTS\ASCII_IMAGE\BUILD\WINDOWS\CMAKEFILES\590C510E374D094BC1AE69768D470387\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\PROJECTS\ASCII_IMAGE\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/projects/ascii_image/windows -BC:/projects/ascii_image/build/windows --check-stamp-file C:/projects/ascii_image/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

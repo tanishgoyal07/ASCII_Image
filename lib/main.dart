@@ -15,10 +15,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -33,22 +35,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.green,
           inputDecorationTheme: const InputDecorationTheme(
             prefixIconColor: GlobalVariables.mainColor,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.zero),
-              borderSide: BorderSide(color: GlobalVariables.mainColor),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.zero),
-              borderSide: BorderSide(color: GlobalVariables.mainColor),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.zero),
-              borderSide: BorderSide(color: GlobalVariables.mainColor),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.zero),
-              borderSide: BorderSide(color: GlobalVariables.mainColor),
-            ),
+           
           ),
         ).copyWith(
           scaffoldBackgroundColor: GlobalVariables.secondaryColor,
@@ -57,13 +44,15 @@ class MyApp extends StatelessWidget {
               .copyWith(primary: GlobalVariables.mainColor),
         ),
         debugShowCheckedModeBanner: false,
-        home: MyHomePage(),
+        home: const MyHomePage(),
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   SplashScreenState createState() => SplashScreenState();
 }
