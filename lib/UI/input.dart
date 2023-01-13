@@ -59,7 +59,7 @@ class _InputState extends State<Input> {
                         icon: Icon(Icons.photo),
                         label: Text('Gallery'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
+                          // backgroundColor: Colors.grey,
                         ),
                       ),
 
@@ -73,7 +73,7 @@ class _InputState extends State<Input> {
                         icon: Icon(Icons.photo_camera),
                         label: Text('Camera'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
+                          // backgroundColor: Colors.grey,
                         ),
                       ),
 
@@ -87,7 +87,7 @@ class _InputState extends State<Input> {
                         icon: Icon(Icons.cancel),
                         label: Text('Cancel'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
+                          // backgroundColor: Colors.grey,
                         ),
                       ),
                     ],
