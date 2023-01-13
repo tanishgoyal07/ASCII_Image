@@ -4,6 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:ascii_image/constants/utils.dart';
 import 'package:ascii_image/providers/user_provider.dart';
 import 'package:ascii_image/screens/home_screen.dart';
+import 'package:ascii_image/screens/landing_screen.dart';
 import 'package:ascii_image/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -72,7 +73,7 @@ class SplashScreenState extends State<MyHomePage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active) {
                   if (snapshot.hasData) {
-                    return const HomeScreen();
+                    return const LandingScreen();
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text('${snapshot.error}'),

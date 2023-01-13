@@ -49,6 +49,7 @@ dependencies:
   ansi_escapes: ^1.1.0
   neoansi: ^0.3.2+1
   http: ^0.13.5
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

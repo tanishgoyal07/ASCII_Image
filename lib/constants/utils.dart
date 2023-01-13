@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
-String uri = 'http://localhost:8000/v1/ascii';
+String uri = 'http://172.29.103.125:8000/v1/ascii';
 
 class GlobalVariables {
   static const mainColor = Color(0xffc2ef11);
@@ -21,6 +21,7 @@ pickImage(ImageSource src) async{
   if(file != null){
     return await file.readAsBytes();
   }
+  
 }
 
 showSnackBar(String content ,BuildContext context){

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ascii_image/screens/home_screen.dart';
+import 'package:ascii_image/screens/landing_screen.dart';
 import 'package:ascii_image/screens/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -90,7 +91,7 @@ class AuthMethods {
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const LandingScreen()),
         (route) => false);
   }
 
@@ -110,7 +111,7 @@ class AuthMethods {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
+                    builder: (context) => const LandingScreen(),
                   ),
                 ),
               },

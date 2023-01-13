@@ -13,8 +13,8 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->C:\projects\ascii_image\android\app\src\debug\AndroidManifest.xml:7:5-66
-15-->C:\projects\ascii_image\android\app\src\debug\AndroidManifest.xml:7:22-64
+15-->C:\projects\ascii_image\android\app\src\main\AndroidManifest.xml:3:5-66
+15-->C:\projects\ascii_image\android\app\src\main\AndroidManifest.xml:3:22-64
 16    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 16-->[:file_picker] C:\projects\ascii_image\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-80
 16-->[:file_picker] C:\projects\ascii_image\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-77
@@ -52,7 +52,7 @@
 33-->[androidx.core:core:1.8.0] C:\Users\Tanish Goyal\.gradle\caches\transforms-3\0ce731f8c62e88af9af421907435d7da\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
 34        android:debuggable="true"
 35        android:icon="@mipmap/ic_launcher"
-36        android:label="ascii_image" >
+36        android:label="Ascii-Studio" >
 37        <activity
 38            android:name="com.example.ascii_image.MainActivity"
 39            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
