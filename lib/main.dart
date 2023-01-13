@@ -62,7 +62,7 @@ class SplashScreenState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds: 7),
+      const Duration(seconds: 8),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -110,8 +110,8 @@ class SplashScreenState extends State<MyHomePage> {
           child: AnimatedTextKit(
             animatedTexts: [
               TypewriterAnimatedText(
-                'WELCOME',
-                speed: const Duration(milliseconds: 800),
+                'ASCII-STUDIO',
+                speed: const Duration(milliseconds: 600),
                 cursor: '|',
               ),
             ],

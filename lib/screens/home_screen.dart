@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:ansi_escapes/ansi_escapes.dart';
 import 'package:ascii_image/providers/user_provider.dart';
 import 'package:ascii_image/resources/firestore_methods.dart';
 import 'package:ascii_image/services/ascii_services.dart';
@@ -37,30 +39,29 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isEnable = true;
   bool flag = true;
   followCommands(String comm) {
-    if (comm == '\\help') {
-      var commands = "\\signup --> to sign up as a new user\n"
-          "\\login --> to log in as an existing user\n"
-          "\\text\\<your text here> --> to convert your text to ASCII Image\n"
-          "\\image --> to convert your image to ASCII Image\n"
-          "\\download\\recent --> to download the last ASCII Image\n";
-      "/logout --> to logout from your account\n";
+    if (comm == 'help') {
+      var commands = "signup --> to sign up as a new user\n"
+          "login --> to log in as an existing user\n"
+          "<your text here> --> to convert your text to ASCII Image\n"
+          "image --> to convert your image to ASCII Image\n"
+          "download\\recent --> to download the last ASCII Image\n";
+      "logout --> to logout from your account\n";
       setState(() {
         output = commands;
       });
-    } else if (comm == '\\image') {
+    } else if (comm == 'image') {
       selectImage();
-    } else if (comm.contains('\\text\\')) {
-      setState(() {
-        output = "helloo";
-      });
-    } else if (comm == '\\logout') {
+    } else if (comm == 'logout') {
       var comm = "logging out....";
       setState(() {
         output = comm;
       });
       authMethods.logout(context);
+    } else {
+      fetchAsciiFromText(comm);
     }
   }
+  
 
   @override
   void initState() {
@@ -77,9 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
           .collection("users")
           .doc(user!.uid)
           .get();
-
       userData = userSnap.data()!;
-      print(userData);
       setState(() {});
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -103,18 +102,26 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  fetchAsciiFromText(String text) async {
-
-    await asciiServices.uploadTextCommand(text: text, context: context);
-    setState(() {});
-  }
-
   fetchAsciiFromImage() async {
-       print("check2");
-    await asciiServices.uploadImageCommand(url: imageUrl, context: context);
+    print("check2");
+    String ans = await asciiServices.uploadImageCommand(url: imageUrl, context: context);
     print("check4");
-    setState(() {});
+    setState(() {
+      output = ans;
+    });
   }
+
+  fetchAsciiFromText(String text) async {
+    print(text);
+    String ans = await asciiServices.uploadTextCommand(text: text, context: context);
+    // String ans = await asciiServices.getAnsiValue(text);
+    // print(ans);
+    setState(() {
+      output = ans;
+    });
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -125,13 +132,14 @@ class _HomeScreenState extends State<HomeScreen> {
             appBar: AppBar(
               backgroundColor: Colors.grey[900],
               title: Text(
-                "Command Prompt",
+                "ASCII STUDIO",
                 style: GoogleFonts.courierPrime(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              centerTitle: true,
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -140,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "Type \\help to view the list of commands.",
+                      "Type help to view the list of commands.",
                       style: GoogleFonts.courierPrime(
                         color: GlobalVariables.mainColor,
                         fontSize: 16.0,
@@ -163,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 padding: const EdgeInsets.all(2.0),
                 child: Text(
-                  "C:\\users\\${userData['firstName']}${userData['secondName']}",
+                  "C:\\users\\${userData['firstName']}${userData['secondName']}\\",
                   style: const TextStyle(
                     color: GlobalVariables.mainColor,
                     fontSize: 16.0,

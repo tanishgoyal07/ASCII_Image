@@ -310,7 +310,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           },
         ),
         title: Text(
-          "C:/users/signup",
+          "C:\\users\\signup",
           style: GoogleFonts.courierPrime(
             color: GlobalVariables.secondaryColor,
             fontSize: 20,
@@ -331,10 +331,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 180,
+                      height: 200,
                       child: Image.asset(
-                        "assets/logo2.png",
-                        fit: BoxFit.cover,
+                        "assets/as_logo.jpg",
+                        fit: BoxFit.fill,
                       ),
                     ),
                     const SizedBox(height: 45),
