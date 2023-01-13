@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:ascii_image/screens/landing_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_randomcolor/flutter_randomcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ascii_image/constants/utils.dart';
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isEnable = true;
   bool flag = true;
   var newPage;
+  Options options = Options();
 
   followCommands(String comm) {
     if (comm == 'help') {
@@ -136,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Text(
           output,
           style: GoogleFonts.courierPrime(
-            color: GlobalVariables.mainColor,
+            color: Colors.greenAccent,
             fontSize: 13.0,
           ),
         ),

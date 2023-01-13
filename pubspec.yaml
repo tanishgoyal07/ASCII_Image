@@ -51,6 +51,8 @@ dependencies:
   http: ^0.13.5
   get: ^4.6.5
   aspose_words_cloud: ^22.11.0
+  flutter_randomcolor: ^1.0.14
+  random_pk: ^0.0.3
 
 dev_dependencies:
   flutter_test:

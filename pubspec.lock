@@ -237,6 +237,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.7"
+  flutter_randomcolor:
+    dependency: "direct main"
+    description:
+      name: flutter_randomcolor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.14"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -478,6 +485,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.5"
+  random_pk:
+    dependency: "direct main"
+    description:
+      name: random_pk
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   sky_engine:
     dependency: transitive
     description: flutter

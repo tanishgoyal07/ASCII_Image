@@ -206,6 +206,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_randomcolor",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_randomcolor-1.0.14",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/src/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -416,6 +422,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "random_pk",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/random_pk-0.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -494,7 +506,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-01-13T12:37:20.154679Z",
+  "generated": "2023-01-13T13:52:01.325999Z",
   "generator": "pub",
   "generatorVersion": "2.17.5"
 }
