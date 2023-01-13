@@ -1,19 +1,15 @@
-import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:ansi_escapes/ansi_escapes.dart';
 import 'package:ascii_image/screens/landing_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:get/get.dart';
-import 'package:ascii_image/constants/loader.dart';
 import 'package:ascii_image/constants/utils.dart';
 import 'package:ascii_image/resources/auth_methods.dart';
 import 'package:ascii_image/resources/firestore_methods.dart';
 import 'package:ascii_image/services/ascii_services.dart';
+import 'package:neoansi/neoansi.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -46,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
       newPage = const HomeScreen();
     } else if (comm == 'image') {
       selectImage();
-     
     } else if (comm == 'logout') {
       var comm = "logging out....";
       setState(() {
@@ -100,7 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                "${userData['firstName']}${userData['secondName']}@ascii-studio \$".toLowerCase(),
+                "${userData['firstName']}${userData['secondName']}@ascii-studio \$"
+                    .toLowerCase(),
                 style: const TextStyle(
                   color: GlobalVariables.mainColor,
                   fontSize: 16.0,

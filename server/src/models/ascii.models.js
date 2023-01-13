@@ -1,6 +1,7 @@
 const google = require("googleapis").google;
 const customSearch = google.customsearch("v1");
 const imageToAscii = require("image-to-ascii");
+const { strip } = require("ansicolor");
 
 const API_KEY = process.env.API_KEY;
 const searchEngineId = "10eadc6748b024c38";
@@ -10,7 +11,7 @@ async function getImageURL(keyword) {
     const response = await customSearch.cse.list({
       auth: API_KEY,
       cx: searchEngineId,
-      q: query + "animated" + "image",
+      q: query ,
       searchType: "image",
       num: 2,
     });
@@ -29,19 +30,18 @@ async function getImageURL(keyword) {
 
 // Is a Promise
 const getImageFromFile = (url) => {
-
   return new Promise((resolve, reject) => {
-    imageToAscii(url, { colored: true }, (err, converted) => {
+    imageToAscii(url, { colored: false, reverse : true }, (err, converted) => {
       if (err) {
         reject(err);
       } else {
-        resolve(converted);
-        console.log(converted);
-
+        var res = strip(converted);
+        console.log(converted); // ansii
+        resolve(res); // text
+        console.log(res);
       }
     });
   });
-
 };
 
 async function getImageFromText(keyword) {

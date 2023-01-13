@@ -298,21 +298,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: GlobalVariables.secondaryColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[900],
         elevation: 0,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_outlined,
-            color: GlobalVariables.secondaryColor,
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         title: Text(
-          "C:\\users\\signup",
+          "ascii-studio\\signup",
           style: GoogleFonts.courierPrime(
-            color: GlobalVariables.secondaryColor,
+            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

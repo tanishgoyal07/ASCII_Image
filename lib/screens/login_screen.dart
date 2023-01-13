@@ -157,12 +157,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: GlobalVariables.secondaryColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[900],
         elevation: 0,
         title: Text(
-          "C:\\users\\signin",
+          "ascii-studio\\login",
           style: GoogleFonts.courierPrime(
-            color: GlobalVariables.secondaryColor,
+            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
